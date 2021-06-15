@@ -4,7 +4,6 @@ import json
 import random
 
 from discord import Embed
-from discord.ext import commands
 
 
 def generate_embed(description, color=0xFEC80B, **kwargs):
