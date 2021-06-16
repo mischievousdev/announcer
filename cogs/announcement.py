@@ -352,6 +352,8 @@ class Announcement(commands.Cog):
             await self.bot.cache.cache_announcements()
             await ctx.reply(f":thumbsup: | Your announcement has been successfully posted! If you would like to restore this announcement, please use the following command `{ctx.prefix}restore quick {announcement_id}`.")
             return await channel.send(embed=embed)
+        else:
+            return await ctx.send("You don't have permissions to use this command!")
 
     @announcement.command()
     @commands.max_concurrency(1, commands.BucketType.guild)
@@ -664,6 +666,8 @@ class Announcement(commands.Cog):
             await self.bot.pool.execute("INSERT INTO timed_announcement_backups(announcement_id, channel_id, embed_details, expires) VALUES($1, $2, $3, $4);", announcement_id, channel.id, embed_details, parsed_time)
             await self.bot.cache.cache_backup_timed_announcements()
             await ctx.reply(f":thumbsup: | Your announcement has been successfully added to the queue! If you would like to restore this announcement, please use the following command `{ctx.prefix}restore timed {announcement_id}`.")
+        else:
+            return await ctx.send("You don't have permissions to use this command!")
 
     @announcement.command()
     @commands.max_concurrency(1, commands.BucketType.guild)
@@ -708,6 +712,8 @@ class Announcement(commands.Cog):
             await self.bot.cache.list_timed_raw_announcements()
             await self.bot.cache.cache_timed_raw_announcement_backups()
             return await ctx.reply(f":thumbsup: | Your announcement has been successfully added to the queue! If you would like to restore this announcement, please use the following command `{ctx.prefix}restore timedRaw {announcement_id}`.")
+        else:
+            return await ctx.send("You don't have permissions to use this command!")
 
     @announcement.command()
     @commands.max_concurrency(1, commands.BucketType.guild)
@@ -737,7 +743,8 @@ class Announcement(commands.Cog):
             except asyncio.TimeoutError:
                 await content_msg.delete()
                 return await ctx.send("Cancelled as the session is inactive!")
-
+        else:
+            return await ctx.send("You don't have permissions to use this command!")
 
 def setup(bot):
     bot.add_cog(Announcement(bot))
