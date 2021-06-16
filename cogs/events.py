@@ -13,7 +13,7 @@ class Events(commands.Cog):
             return
 
         elif isinstance(error, commands.MissingRequiredArgument):
-            return await ctx.send(f"{ctx.command.name} requires {error.param.name} argument, you missed giving that! For more information see: `{ctx.prefix}help {ctx.command.name}`")
+            return await ctx.send(f"Command `{ctx.command.name}` requires `{error.param.name}` argument, you missed giving that! For more information see: `{ctx.prefix}help {ctx.command.name}`")
         
         elif isinstance(error, commands.BadArgument):
             return await ctx.send(f"{''.join(error.args)} not found!")
