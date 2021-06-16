@@ -93,7 +93,7 @@ class Backup(commands.Cog):
             content = announcement.content
             channel = self.bot.get_channel(announcement.channel_id)
             await self.bot.pool.execute("DELETE FROM raw_announcements WHERE announcement_id = $1", announcement_id)
-            await self.bot.cache.cache_timed_raw_announcement_backups()
+            await self.bot.cache.cache_raw_announcements()
             await channel.send(content)
             await ctx.reply(f":thumbsup: | Your announcment(#`{announcement_id}`) has been restored successfully!")
 
