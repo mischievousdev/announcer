@@ -10,7 +10,7 @@ Say goodbye to all the fuss and stern when announcing! With announcer, making an
 - [x] Interactive command to ease announcement making
 
 # WIP
-- [ ] Add error handler
+- [ ] Add translations
 - [ ] Use redis for cache
 - [ ] Add docker support
 

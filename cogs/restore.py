@@ -3,7 +3,7 @@
 import discord
 from discord.ext import commands
 
-from utils.utlities import generate_embed, check_allowed
+from utils.utlities import check_allowed
 
 
 class Backup(commands.Cog):
