@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from utils.utlities import generate_embed
-
 import discord
 from discord.ext import commands
 
+from utils.utlities import generate_embed
 
 class Config(commands.Cog):
     """Configuration commands which allows you to modify bot according to your specifications!"""
