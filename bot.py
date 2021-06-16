@@ -57,7 +57,7 @@ class Announcer(commands.Bot):
         self.blacklist = Blacklist()
 
         # load extensions
-        extensions = ["jishaku", "cogs.dev", "cogs.config", "cogs.restore", "cogs.help"]
+        extensions = ["jishaku", "cogs.dev", "cogs.config", "cogs.restore", "cogs.help", "cogs.events"]
         for ext in extensions:
             try:
                 self.load_extension(ext)
