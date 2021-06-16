@@ -94,8 +94,6 @@ class Announcer(commands.Bot):
             self.log.info("Extension loaded: cogs.announcement")
 
             # Cache channels
-            self.error_log_channel = await self.fetch_channel(848925557143240715)
-            self.join_logs_channel = await self.fetch_channel(848920046133575698)
             self.status_log_channel = await self.fetch_channel(849272565478326282)
             self.log.info("Successfully cached log channels")
 
@@ -108,10 +106,6 @@ class Announcer(commands.Bot):
                 content=f":robot: | Connected to discord websocket(Average latency: `{round(self.latency * 1000)}ms`)"
             )
             self.log.info("Successfully sent status message")
-
-            # set `first_startup` to False
-            self.first_startup = False
-            self.log.info("Changed `first_startup` to False")
 
             self.log.info(
                 f"{str(self.user)} started - Average latency: {round(self.latency * 1000)}ms"
