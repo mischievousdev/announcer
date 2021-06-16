@@ -60,7 +60,7 @@ class Backup(commands.Cog):
     @restore.command()
     @commands.max_concurrency(1, commands.BucketType.guild)
     async def timedRaw(self, ctx, announcement_id: int):
-        """Command that restores saved raw announcements"""
+        """Command that restores saved time raw announcements"""
         allowed = await check_allowed(ctx)
         if (
             ctx.author == ctx.guild.owner
@@ -73,6 +73,26 @@ class Backup(commands.Cog):
             content = announcement.content
             channel = self.bot.get_channel(announcement.channel_id)
             await self.bot.pool.execute("DELETE FROM timed_raw_announcement_backups WHERE announcement_id = $1", announcement_id)
+            await self.bot.cache.cache_timed_raw_announcement_backups()
+            await channel.send(content)
+            await ctx.reply(f":thumbsup: | Your announcment(#`{announcement_id}`) has been restored successfully!")
+
+    @restore.command()
+    @commands.max_concurrency(1, commands.BucketType.guild)
+    async def raw(self, ctx, announcement_id: int):
+        """Command that restores saved raw announcements"""
+        allowed = await check_allowed(ctx)
+        if (
+            ctx.author == ctx.guild.owner
+            or ctx.author.guild_permissions.administrator
+            or allowed
+        ):
+            announcement = self.bot.cache.get_raw_announcement(announcement_id)
+            if not announcement:
+                return await ctx.reply("Announcement not found!")
+            content = announcement.content
+            channel = self.bot.get_channel(announcement.channel_id)
+            await self.bot.pool.execute("DELETE FROM raw_announcements WHERE announcement_id = $1", announcement_id)
             await self.bot.cache.cache_timed_raw_announcement_backups()
             await channel.send(content)
             await ctx.reply(f":thumbsup: | Your announcment(#`{announcement_id}`) has been restored successfully!")
